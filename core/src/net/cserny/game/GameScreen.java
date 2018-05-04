@@ -15,7 +15,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 public class GameScreen extends ScreenAdapter {
 
@@ -43,7 +42,7 @@ public class GameScreen extends ScreenAdapter {
     private boolean directionSet = false;
     private Array<BodyPart> bodyParts = new Array<>();
     private ShapeRenderer shapeRenderer;
-    private STATE state = STATE.PLAYING;
+    private State state = State.PLAYING;
     private BitmapFont bitmapFont;
 
     @Override
@@ -94,7 +93,7 @@ public class GameScreen extends ScreenAdapter {
     private void checkSnakeBodyCollision() {
         for (BodyPart part : bodyParts) {
             if (part.x == snakeX && part.y == snakeY) {
-                state = STATE.GAME_OVER;
+                state = State.GAME_OVER;
             }
         }
     }
@@ -108,7 +107,7 @@ public class GameScreen extends ScreenAdapter {
         if (appleAvailable) {
             batch.draw(apple, appleX, appleY);
         }
-        if (state == STATE.GAME_OVER) {
+        if (state == State.GAME_OVER) {
             GlyphLayout gameOverLayout = new GlyphLayout();
             gameOverLayout.setText(bitmapFont, GAME_OVER_MSG);
             bitmapFont.draw(batch, GAME_OVER_MSG,
@@ -136,7 +135,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void doRestart() {
-        state = STATE.PLAYING;
+        state = State.PLAYING;
         bodyParts.clear();
         snakeDirection = RIGHT;
         directionSet = false;
@@ -176,7 +175,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawScore() {
-        if (state == STATE.PLAYING) {
+        if (state == State.PLAYING) {
             String scoreAsString = Integer.toString(score);
             GlyphLayout scoreLayout = new GlyphLayout();
             scoreLayout.setText(bitmapFont, scoreAsString);

@@ -1,5 +1,5 @@
 package net.cserny.game;
 
-public enum STATE {
+public enum State {
     PLAYING, GAME_OVER
 }
